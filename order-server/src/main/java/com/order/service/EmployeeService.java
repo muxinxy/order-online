@@ -2,7 +2,9 @@ package com.order.service;
 
 import com.order.dto.EmployeeDTO;
 import com.order.dto.EmployeeLoginDTO;
+import com.order.dto.EmployeePageQueryDTO;
 import com.order.entity.Employee;
+import com.order.result.PageResult;
 
 public interface EmployeeService {
 
@@ -18,5 +20,11 @@ public interface EmployeeService {
      * @param employee
      */
     void save(EmployeeDTO employeeDTO);
+
+    /**
+     * 分页查询员工信息
+     * @param employeePageQueryDTO
+     */
+    PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
 }

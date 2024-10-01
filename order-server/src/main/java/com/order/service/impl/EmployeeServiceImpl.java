@@ -1,21 +1,26 @@
 package com.order.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.order.constant.MessageConstant;
 import com.order.constant.PasswordConstant;
 import com.order.constant.StatusConstant;
 import com.order.context.BaseContext;
 import com.order.dto.EmployeeDTO;
 import com.order.dto.EmployeeLoginDTO;
+import com.order.dto.EmployeePageQueryDTO;
 import com.order.entity.Employee;
 import com.order.exception.AccountLockedException;
 import com.order.exception.AccountNotFoundException;
 import com.order.exception.PasswordErrorException;
 import com.order.mapper.EmployeeMapper;
+import com.order.result.PageResult;
 import com.order.service.EmployeeService;
 
 import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,4 +94,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.save(employee);
     }
 
+    /**
+     * 分页查询员工信息
+     *
+     * @param employeePageQueryDTO
+     */
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
+        Long total = page.getTotal();
+        List<Employee> employeeList = page.getResult();
+        return new PageResult(total, employeeList);
+    }
 }

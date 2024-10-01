@@ -3,8 +3,10 @@ package com.order.controller.admin;
 import com.order.constant.JwtClaimsConstant;
 import com.order.dto.EmployeeDTO;
 import com.order.dto.EmployeeLoginDTO;
+import com.order.dto.EmployeePageQueryDTO;
 import com.order.entity.Employee;
 import com.order.properties.JwtProperties;
+import com.order.result.PageResult;
 import com.order.result.Result;
 import com.order.service.EmployeeService;
 import com.order.utils.JwtUtil;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * 员工管理
@@ -90,6 +95,14 @@ public class EmployeeController {
         log.info("新增员工：{}", employeeDTO);
         employeeService.save(employeeDTO);
         return Result.success();
+    }
+    
+    @GetMapping("/page")
+    @ApiOperation("分页查询员工")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
+        log.info("分页查询员工：{}", employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
     }
 
 }
