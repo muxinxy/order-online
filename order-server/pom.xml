@@ -13,7 +13,7 @@
 
         <dependency>
             <groupId>com.order</groupId>
-            <artifactId>sky-common</artifactId>
+            <artifactId>order-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
