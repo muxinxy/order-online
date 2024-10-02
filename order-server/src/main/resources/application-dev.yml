@@ -6,3 +6,6 @@ order:
     database: order_online
     username: root
     password: 123456
+  local-storage:
+    location: D:/tmp/order
+    base-url: http://localhost:8080/file
