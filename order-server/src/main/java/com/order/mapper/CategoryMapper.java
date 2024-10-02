@@ -8,9 +8,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.github.pagehelper.Page;
+import com.order.annotation.AutoFill;
 import com.order.dto.CategoryDTO;
 import com.order.dto.CategoryPageQueryDTO;
 import com.order.entity.Category;
+import com.order.enumeration.OperationType;
 
 @Mapper
 public interface CategoryMapper {
@@ -21,6 +23,7 @@ public interface CategoryMapper {
      */
     @Insert("insert into category (name, sort, type, status, create_time, update_time, create_user, update_user)"
     + "values (#{name}, #{sort}, #{type}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
     void save(Category category);
 
     /**
@@ -48,6 +51,7 @@ public interface CategoryMapper {
      * 修改分类
      * @param category
      */
+    @AutoFill(value = OperationType.UPDATE)
     void update(Category category);
 
     /**
