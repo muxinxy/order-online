@@ -1,5 +1,8 @@
 package com.order.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,5 +39,28 @@ public interface DishMapper {
      * @return Page<DishVO>
      */
     Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 根据id查询菜品
+     * @param id
+     * @return Dish
+     */
+    @Select("select * from dish where id = #{id}")
+    Dish selectById(Long id);
+
+    /**
+     * 删除菜品
+     * @param id
+     * @return void
+     */
+    @Delete("delete from dish where id = #{id}")
+    void deleteById(Long id);
+
+    /**
+     * 批量删除菜品
+     * @param ids
+     * @return void
+     */
+    void deleteBatch(List<Long> ids);
 
 }
