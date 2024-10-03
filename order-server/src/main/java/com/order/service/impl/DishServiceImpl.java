@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.order.dto.DishDTO;
+import com.order.dto.DishPageQueryDTO;
 import com.order.entity.Dish;
 import com.order.entity.DishFlavor;
 import com.order.mapper.DishFlavorMapper;
 import com.order.mapper.DishMapper;
+import com.order.result.PageResult;
 import com.order.service.DishService;
+import com.order.vo.DishVO;
 
 /**
  * 菜品服务实现类
@@ -28,6 +33,8 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 新增菜品
+     * @param dishDTO
+     * @return
      */
     @Transactional
     public void saveWithFlavors(DishDTO dishDTO) {
@@ -42,6 +49,17 @@ public class DishServiceImpl implements DishService {
             });
             dishFlavorMapper.insertBatch(flavors);
         }
+    }
+
+    /**
+     * 分页查询菜品
+     * @param dishPageQueryDTO
+     * @return PageResult
+     */
+    public PageResult page(DishPageQueryDTO dishPageQueryDTO) {
+        PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
+        Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
 }
