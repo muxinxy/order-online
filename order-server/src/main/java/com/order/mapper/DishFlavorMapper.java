@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.order.entity.DishFlavor;
 
@@ -40,5 +41,13 @@ public interface DishFlavorMapper {
      * @return void
      */
     void deleteByDishIds(List<Long> dishIds);
+
+    /**
+     * 根据菜品id查询菜品口味
+     * @param id
+     * @return List<DishFlavor>
+     */
+    @Select("select * from dish_flavor where dish_id = #{id}")
+    List<DishFlavor> getByDishId(Long id);
 
 }

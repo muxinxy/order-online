@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.github.pagehelper.Page;
 import com.order.annotation.AutoFill;
@@ -46,7 +47,7 @@ public interface DishMapper {
      * @return Dish
      */
     @Select("select * from dish where id = #{id}")
-    Dish selectById(Long id);
+    Dish getById(Long id);
 
     /**
      * 删除菜品
@@ -62,5 +63,13 @@ public interface DishMapper {
      * @return void
      */
     void deleteBatch(List<Long> ids);
+
+    /**
+     * 更新菜品
+     * @param dish
+     * @return void
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
 
 }
