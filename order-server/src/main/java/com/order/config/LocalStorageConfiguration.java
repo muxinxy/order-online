@@ -9,10 +9,18 @@ import com.order.utils.LocalStorageUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 本地存储配置
+ */
 @Configuration
 @Slf4j
 public class LocalStorageConfiguration {
 
+    /**
+     * 本地存储工具类
+     * @param localStorageProperties
+     * @return LocalStorageUtil
+     */
     @Bean
     @ConditionalOnMissingBean
     public LocalStorageUtil localStorageUtil(LocalStorageProperties localStorageProperties) {

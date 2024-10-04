@@ -9,14 +9,16 @@ import com.order.constant.MessageConstant;
 import com.order.result.Result;
 import com.order.utils.LocalStorageUtil;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 通用控制器
+ * 通用接口
  */
 @RestController
 @RequestMapping("/admin/common")
+@Api(tags = "通用接口")
 @Slf4j
 public class CommonController {
 
